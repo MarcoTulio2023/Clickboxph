@@ -1,9 +1,6 @@
-// components/Contact.tsx
-
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Mail, Phone, MapPin, Instagram, Camera, Send, Sparkles, Heart, Zap, CheckCircle } from 'lucide-react';
-// A importação do 'Button' não é necessária aqui
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
@@ -22,15 +19,12 @@ export function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Validação extra para garantir que os campos obrigatórios estão preenchidos
     if (!formData.name || !formData.email || !formData.message) {
       alert("Por favor, preencha os campos obrigatórios (*).");
       return;
     }
-
     try {
-      // Lembre-se de criar seu formulário no Formspree e colar a URL aqui
+      // LEMBRETE: Cole sua URL única do Formspree aqui
       const response = await fetch("COLE_AQUI_A_SUA_URL_DO_FORMSPREE", {
         method: 'POST',
         headers: {
@@ -40,11 +34,11 @@ export function Contact() {
       });
 
       if (response.ok) {
-        setIsSubmitted(true); // Mostra a mensagem de sucesso
+        setIsSubmitted(true);
         setTimeout(() => {
-          setIsSubmitted(false); // Volta para o formulário
-          setFormData({ name: '', email: '', phone: '', service: '', message: '' }); // Limpa os campos
-        }, 4000); // Aumentei o tempo para 4 segundos
+          setIsSubmitted(false);
+          setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+        }, 4000);
       } else {
         alert("Ocorreu um erro ao enviar a mensagem. Tente novamente mais tarde.");
       }
@@ -52,7 +46,7 @@ export function Contact() {
       alert("Ocorreu um erro de rede. Verifique sua conexão e tente novamente.");
     }
   };
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData(prev => ({
       ...prev,
@@ -78,7 +72,7 @@ export function Contact() {
       icon: MapPin,
       label: 'Localização',
       value: 'Araguari, MG',
-      // Sem 'href' aqui para não ser clicável
+      // Sem 'href', este card não será clicável
     },
     {
       icon: Instagram,
@@ -190,7 +184,7 @@ export function Contact() {
                       </motion.div>
                       <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.9, duration: 0.6 }}>
                         <label htmlFor="phone" className="block text-sm font-medium mb-2 text-[#F2F2F2]">WhatsApp</label>
-                        <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="(11) 99999-9999" className="bg-[#F2F2F2]/10 backdrop-blur-sm border-[#737065]/30 text-[#F2F2F2] placeholder:text-[#BBBFBD] focus:border-[#BFBAA8] focus:ring-[#BFBAA8]/20"/>
+                        <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="(34) 98427-3479" className="bg-[#F2F2F2]/10 backdrop-blur-sm border-[#737065]/30 text-[#F2F2F2] placeholder:text-[#BBBFBD] focus:border-[#BFBAA8] focus:ring-[#BFBAA8]/20"/>
                       </motion.div>
                     </div>
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 1, duration: 0.6 }}>
@@ -255,19 +249,22 @@ export function Contact() {
               <div className="space-y-6">
                 {contactInfo.map((info, index) => {
                   const Icon = info.icon;
-                  const motionProps = {
-                    initial: { opacity: 0, x: -20 },
-                    animate: isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 },
-                    transition: { delay: 0.8 + index * 0.1, duration: 0.6 },
-                    whileHover: { scale: 1.02, x: 10 },
-                    className: "group flex items-start gap-4 p-4 bg-[#F2F2F2]/5 backdrop-blur-sm rounded-2xl border border-[#737065]/20 hover:bg-[#F2F2F2]/10 transition-all duration-300"
-                  };
                   
-                  // 2. LÓGICA PARA TORNAR OS CARDS CLICÁVEIS (OU NÃO)
+                  // 2. LÓGICA PARA TORNAR OS CARDS CLICÁVEIS (OU NÃO), AGORA CORRIGIDA
                   if (info.href) {
                     return (
-                      <motion.a key={index} href={info.href} target="_blank" rel="noopener noreferrer" {...motionProps}>
-                        <motion.div className={`flex items-center justify-center w-12 h-12 bg-gradient-to-r ${info.color || 'from-[#737065] to-[#403F38]'} rounded-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300`} whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
+                      <motion.a 
+                        key={index} 
+                        href={info.href} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                        transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
+                        whileHover={{ scale: 1.02, x: 10 }}
+                        className="group flex items-start gap-4 p-4 bg-[#F2F2F2]/5 backdrop-blur-sm rounded-2xl border border-[#737065]/20 hover:bg-[#F2F2F2]/10 transition-all duration-300"
+                      >
+                        <motion.div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#737065] to-[#403F38] rounded-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300" whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
                           <Icon className="h-6 w-6 text-[#F2F2F2]" />
                         </motion.div>
                         <div>
@@ -278,8 +275,15 @@ export function Contact() {
                     );
                   } else {
                     return (
-                      <motion.div key={index} {...motionProps}>
-                        <motion.div className={`flex items-center justify-center w-12 h-12 bg-gradient-to-r ${info.color || 'from-[#737065] to-[#403F38]'} rounded-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300`} whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
+                      <motion.div 
+                        key={index} 
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                        transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
+                        whileHover={{ scale: 1.02, x: 10 }}
+                        className="group flex items-start gap-4 p-4 bg-[#F2F2F2]/5 backdrop-blur-sm rounded-2xl border border-[#737065]/20 hover:bg-[#F2F2F2]/10 transition-all duration-300"
+                      >
+                        <motion.div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#737065] to-[#403F38] rounded-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300" whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
                           <Icon className="h-6 w-6 text-[#F2F2F2]" />
                         </motion.div>
                         <div>
