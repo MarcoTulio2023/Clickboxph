@@ -18,7 +18,6 @@ export function Header() {
   const navigation = [
     { name: 'Início', href: '#home' },
     { name: 'Estrutura de Foto', href: '#photo-booth' },
-    { name: 'Ensaios', href: '#gallery' },
     { name: 'Sobre', href: '#about' },
     { name: 'Serviços', href: '#services' },
     { name: 'Contato', href: '#contact' },

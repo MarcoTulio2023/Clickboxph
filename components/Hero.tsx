@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ChevronDown, Play, Sparkles, Zap } from 'lucide-react';
+import { Play, Sparkles, Zap } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function Hero() {
@@ -150,21 +150,6 @@ export function Hero() {
               />
               <span className="relative z-10">Estrutura de Foto</span>
               <Play className="h-4 w-4 relative z-10" />
-            </motion.a>
-
-            <motion.a
-              href="#gallery"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-[#F2F2F2]/10 backdrop-blur-xl border border-[#BBBFBD]/20 rounded-2xl font-semibold hover:bg-[#F2F2F2]/20 transition-all duration-300 text-[#F2F2F2]"
-              whileHover={{ scale: 1.05, borderColor: 'rgba(191, 186, 168, 0.4)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span>Ensaios</span>
-              <motion.div
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                →
-              </motion.div>
             </motion.a>
           </motion.div>
         </motion.div>

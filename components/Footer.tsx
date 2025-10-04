@@ -13,7 +13,6 @@ export function Footer() {
   const footerLinks = [
     { name: 'Início', href: '#home' },
     { name: 'Estrutura de foto', href: '#photo-booth'},
-    { name: 'Ensaios', href: '#gallery' },
     { name: 'Sobre', href: '#about' },
     { name: 'Serviços', href: '#services' },
     { name: 'Contato', href: '#contact' },
