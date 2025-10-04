@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Play, Sparkles, Zap } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import Image from 'next/image';
 
 export function Hero() {
   return (
@@ -35,10 +35,13 @@ export function Hero() {
 
       {/* Main background image with overlay */}
       <div className="absolute inset-0">
-        <ImageWithFallback
+        <Image
           src='/assets/Gilberto Santos.png'
           alt="Fotografia profissional de Gilberto Santos"
-          className="w-full h-full object-cover opacity-40"
+          fill
+          className="object-cover opacity-40"
+          priority // Importante para a imagem principal carregar rápido
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-[#000B07]/70 via-[#403F38]/50 to-[#000B07]/70" />
       </div>

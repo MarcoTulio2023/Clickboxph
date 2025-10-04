@@ -1,7 +1,9 @@
 import { useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { Camera, Check, Sparkles, Star, ArrowRight, Zap } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+
 import photoBooth1 from '../public/assets/Estrutura cinza.jpg';
 import photoBooth2 from '../public/assets/Estrutura Roxo.jpg';
 import React from 'react';
@@ -154,11 +156,12 @@ export function PhotoBooth() {
               <Card className="group relative overflow-hidden border-0 bg-gradient-to-br from-[#F2F2F2]/95 to-[#BFBAA8]/20 backdrop-blur-xl hover:shadow-2xl transition-all duration-500 h-full">
                 {/* Image section */}
                 <div className="relative h-80 overflow-hidden rounded-t-lg cursor-pointer" onClick={() => setSelectedImage(pkg.image)}>
-                  <motion.img
+                  <Image
                     src={pkg.image}
                     alt={pkg.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    whileHover={{ scale: 1.05 }}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#000B07]/50 to-transparent" />
                   
