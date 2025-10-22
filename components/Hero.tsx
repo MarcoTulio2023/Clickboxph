@@ -9,14 +9,6 @@ export function Hero() {
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden bg-[#000B07]">
       {/* Imagem de fundo */}
       <div className="absolute inset-0">
-        <Image
-          src="/assets/Estrutura Roxo.jpg" // SUGESTÃO: Use uma boa foto da estrutura aqui
-          alt="Estrutura de fotos ClickBox em um evento"
-          fill
-          className="object-cover opacity-30"
-          priority
-          sizes="100vw"
-        />
         <div className="absolute inset-0 bg-gradient-to-br from-[#000B07]/70 via-[#403F38]/50 to-[#000B07]/70" />
       </div>
 

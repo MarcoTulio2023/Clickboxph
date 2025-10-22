@@ -1,3 +1,7 @@
+// components/Contact.tsx
+
+"use client";
+
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Mail, Phone, MapPin, Instagram, Camera, Send, Sparkles, Heart, Zap, CheckCircle } from 'lucide-react';
@@ -6,13 +10,7 @@ import { Textarea } from './ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: ''
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', service: '', message: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -24,15 +22,11 @@ export function Contact() {
       return;
     }
     try {
-      // LEMBRETE: Cole sua URL única do Formspree aqui
       const response = await fetch("COLE_AQUI_A_SUA_URL_DO_FORMSPREE", {
         method: 'POST',
-        headers: {
-          'Accept': 'application/json'
-        },
+        headers: { 'Accept': 'application/json' },
         body: JSON.stringify(formData)
       });
-
       if (response.ok) {
         setIsSubmitted(true);
         setTimeout(() => {
@@ -48,18 +42,14 @@ export function Contact() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // 1. DADOS DOS CARDS ATUALIZADOS CONFORME VOCÊ PEDIU
   const contactInfo = [
     {
       icon: Mail,
       label: 'E-mail',
-      value: 'contato@clickboxph.com', // ALTERADO
+      value: 'contato@clickboxph.com',
       href: `mailto:contato@clickboxph.com?subject=${encodeURIComponent("Contato sobre ClickBox")}&body=${encodeURIComponent("Olá! Gostaria de mais informações sobre os serviços.")}`
     },
     {
@@ -68,18 +58,8 @@ export function Contact() {
       value: '(34) 98427-3479',
       href: `https://wa.me/5534984273479?text=${encodeURIComponent("Olá! Vi seu site e gostaria de mais informações.")}`
     },
-    {
-      icon: MapPin,
-      label: 'Localização',
-      value: 'Araguari, MG',
-      // Sem 'href', este card não será clicável
-    },
-    {
-      icon: Instagram,
-      label: 'Instagram',
-      value: '@clickbox.ph',
-      href: 'https://www.instagram.com/clickbox.ph/'
-    }
+    { icon: MapPin, label: 'Localização', value: 'Araguari, MG' },
+    { icon: Instagram, label: 'Instagram', value: '@clickbox.ph', href: 'https://www.instagram.com/clickbox.ph/' }
   ];
 
   return (
@@ -128,7 +108,6 @@ export function Contact() {
             <Zap className="h-4 w-4" />
             Vamos criar algo incrível juntos
           </motion.div>
-          
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -139,7 +118,6 @@ export function Contact() {
               Entre em Contato
             </span>
           </motion.h2>
-          
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -150,29 +128,109 @@ export function Contact() {
           </motion.p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        {/* ==================================================================== */}
+        {/* 1. O LAYOUT MUDOU: AGORA É UMA COLUNA ÚNICA E CENTRALIZADA */}
+        {/* ==================================================================== */}
+        <div className="flex flex-col items-center gap-16">
+          
+          {/* 2. A ORDEM FOI TROCADA: Os cards de contato agora vêm PRIMEIRO. */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="space-y-8 w-full max-w-xl" // Adicionado max-width para telas grandes
+          >
+            <div>
+              <motion.h3
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.7, duration: 0.6 }}
+                className="text-3xl font-bold mb-8 text-[#F2F2F2] text-center"
+              >
+                Vamos nos conectar
+              </motion.h3>
+              
+              <div className="space-y-6">
+                {contactInfo.map((info, index) => {
+                  const Icon = info.icon;
+                  if (info.href) {
+                    return (
+                      <motion.a 
+                        key={index} href={info.href} target="_blank" rel="noopener noreferrer"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
+                        whileHover={{ scale: 1.02, x: 10 }}
+                        className="group flex items-start gap-4 p-4 bg-[#F2F2F2]/5 backdrop-blur-sm rounded-2xl border border-[#737065]/20 hover:bg-[#F2F2F2]/10 transition-all duration-300"
+                      >
+                        <motion.div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#737065] to-[#403F38] rounded-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300" whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
+                          <Icon className="h-6 w-6 text-[#F2F2F2]" />
+                        </motion.div>
+                        <div>
+                          <h4 className="font-semibold text-[#F2F2F2]">{info.label}</h4>
+                          <p className="text-[#BBBFBD] group-hover:text-[#F2F2F2] transition-colors duration-300">{info.value}</p>
+                        </div>
+                      </motion.a>
+                    );
+                  } else {
+                    return (
+                      <motion.div 
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
+                        whileHover={{ scale: 1.02, x: 10 }}
+                        className="group flex items-start gap-4 p-4 bg-[#F2F2F2]/5 backdrop-blur-sm rounded-2xl border border-[#737065]/20 hover:bg-[#F2F2F2]/10 transition-all duration-300"
+                      >
+                        <motion.div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#737065] to-[#403F38] rounded-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300" whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
+                          <Icon className="h-6 w-6 text-[#F2F2F2]" />
+                        </motion.div>
+                        <div>
+                          <h4 className="font-semibold text-[#F2F2F2]">{info.label}</h4>
+                          <p className="text-[#BBBFBD] group-hover:text-[#F2F2F2] transition-colors duration-300">{info.value}</p>
+                        </div>
+                      </motion.div>
+                    );
+                  }
+                })}
+              </div>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 1.2, duration: 0.8 }}
+              className="bg-gradient-to-br from-[#737065]/20 to-[#BFBAA8]/20 backdrop-blur-xl border border-[#737065]/30 rounded-3xl p-8"
+            >
+              <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 12, repeat: Infinity, ease: "linear" }} className="w-12 h-12 bg-gradient-to-r from-[#737065] to-[#403F38] rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Camera className="h-6 w-6 text-[#F2F2F2]" />
+              </motion.div>
+              <h4 className="text-xl font-bold text-center mb-4 text-[#F2F2F2]">Horário de Atendimento</h4>
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between items-center text-[#BBBFBD]"><span>Segunda - Sexta:</span><span className="font-semibold text-[#F2F2F2]">8h às 19h</span></div>
+                <div className="flex justify-between items-center text-[#BBBFBD]"><span>Sábado:</span><span className="font-semibold text-[#F2F2F2]">9h às 15h</span></div>
+                <div className="flex justify-between items-center text-[#BBBFBD]"><span>Domingo:</span><span className="font-semibold text-[#BFBAA8]">Emergências</span></div>
+              </div>
+              <motion.div className="mt-6 flex items-center justify-center gap-2 text-sm text-[#BBBFBD]" animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 3, repeat: Infinity }}>
+                <Heart className="h-4 w-4 text-[#BFBAA8]" />
+                <span>Respostas rápidas garantidas</span>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.5, duration: 0.8 }}
+            className="w-full max-w-xl" // Adicionado max-width para telas grandes
           >
             <Card className="bg-[#F2F2F2]/5 backdrop-blur-2xl border border-[#737065]/20 shadow-2xl">
               <CardHeader>
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={isInView ? { scale: 1 } : { scale: 0 }}
-                  transition={{ delay: 0.7, duration: 0.6 }}
-                  className="w-12 h-12 bg-gradient-to-r from-[#737065] to-[#403F38] rounded-2xl flex items-center justify-center mx-auto mb-4"
-                >
+                <motion.div initial={{ scale: 0 }} animate={isInView ? { scale: 1 } : {}} transition={{ delay: 0.7, duration: 0.6 }} className="w-12 h-12 bg-gradient-to-r from-[#737065] to-[#403F38] rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <Send className="h-6 w-6 text-[#F2F2F2]" />
                 </motion.div>
-                <CardTitle className="text-2xl text-center text-[#F2F2F2]">
-                  Solicite seu Orçamento
-                </CardTitle>
-                <CardDescription className="text-center text-[#BBBFBD]">
-                  Respondo em até 2 horas durante horário comercial
-                </CardDescription>
+                <CardTitle className="text-2xl text-center text-[#F2F2F2]">Solicite seu Orçamento</CardTitle>
+                <CardDescription className="text-center text-[#BBBFBD]">Respondo em até 2 horas durante horário comercial</CardDescription>
               </CardHeader>
               <CardContent>
                 {!isSubmitted ? (
@@ -195,10 +253,9 @@ export function Contact() {
                       <label htmlFor="service" className="block text-sm font-medium mb-2 text-[#F2F2F2]">Tipo de Serviço</label>
                       <select id="service" name="service" value={formData.service} onChange={handleChange} className="w-full px-3 py-2 bg-[#F2F2F2]/10 backdrop-blur-sm border border-[#737065]/30 text-[#F2F2F2] rounded-md focus:outline-none focus:ring-2 focus:ring-[#BFBAA8]/20 focus:border-[#BFBAA8]">
                         <option value="" className="text-[#403F38] bg-[#F2F2F2]">Selecione um serviço</option>
-                        <option value="retratos" className="text-[#403F38] bg-[#F2F2F2]">Retratos Artísticos</option>
-                        <option value="eventos" className="text-[#403F38] bg-[#F2F2F2]">Eventos Premium</option>
-                        <option value="corporativo" className="text-[#403F38] bg-[#F2F2F2]">Corporate Elite</option>
-                        <option value="produtos" className="text-[#403F38] bg-[#F2F2F2]">Visual Commerce</option>
+                        <option value="pacote-bronze" className="text-[#403F38] bg-[#F2F2F2]">Pacote Bronze</option>
+                        <option value="pacote-ouro" className="text-[#403F38] bg-[#F2F2F2]">Pacote Ouro</option>
+                        <option value="pacote-diamante" className="text-[#403F38] bg-[#F2F2F2]">Pacote Diamante</option>
                         <option value="outro" className="text-[#403F38] bg-[#F2F2F2]">Projeto Personalizado</option>
                       </select>
                     </motion.div>
@@ -227,117 +284,6 @@ export function Contact() {
                 )}
               </CardContent>
             </Card>
-          </motion.div>
-
-          {/* Contact Information */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, x: 50 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="space-y-8"
-          >
-            <div>
-              <motion.h3
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ delay: 0.7, duration: 0.6 }}
-                className="text-3xl font-bold mb-8 text-[#F2F2F2]"
-              >
-                Vamos nos conectar
-              </motion.h3>
-              
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => {
-                  const Icon = info.icon;
-                  
-                  // 2. LÓGICA PARA TORNAR OS CARDS CLICÁVEIS (OU NÃO), AGORA CORRIGIDA
-                  if (info.href) {
-                    return (
-                      <motion.a 
-                        key={index} 
-                        href={info.href} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                        transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
-                        whileHover={{ scale: 1.02, x: 10 }}
-                        className="group flex items-start gap-4 p-4 bg-[#F2F2F2]/5 backdrop-blur-sm rounded-2xl border border-[#737065]/20 hover:bg-[#F2F2F2]/10 transition-all duration-300"
-                      >
-                        <motion.div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#737065] to-[#403F38] rounded-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300" whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
-                          <Icon className="h-6 w-6 text-[#F2F2F2]" />
-                        </motion.div>
-                        <div>
-                          <h4 className="font-semibold text-[#F2F2F2]">{info.label}</h4>
-                          <p className="text-[#BBBFBD] group-hover:text-[#F2F2F2] transition-colors duration-300">{info.value}</p>
-                        </div>
-                      </motion.a>
-                    );
-                  } else {
-                    return (
-                      <motion.div 
-                        key={index} 
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                        transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
-                        whileHover={{ scale: 1.02, x: 10 }}
-                        className="group flex items-start gap-4 p-4 bg-[#F2F2F2]/5 backdrop-blur-sm rounded-2xl border border-[#737065]/20 hover:bg-[#F2F2F2]/10 transition-all duration-300"
-                      >
-                        <motion.div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#737065] to-[#403F38] rounded-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300" whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
-                          <Icon className="h-6 w-6 text-[#F2F2F2]" />
-                        </motion.div>
-                        <div>
-                          <h4 className="font-semibold text-[#F2F2F2]">{info.label}</h4>
-                          <p className="text-[#BBBFBD] group-hover:text-[#F2F2F2] transition-colors duration-300">{info.value}</p>
-                        </div>
-                      </motion.div>
-                    );
-                  }
-                })}
-              </div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ delay: 1.2, duration: 0.8 }}
-              className="bg-gradient-to-br from-[#737065]/20 to-[#BFBAA8]/20 backdrop-blur-xl border border-[#737065]/30 rounded-3xl p-8"
-            >
-              <motion.div
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                className="w-12 h-12 bg-gradient-to-r from-[#737065] to-[#403F38] rounded-2xl flex items-center justify-center mx-auto mb-6"
-              >
-                <Camera className="h-6 w-6 text-[#F2F2F2]" />
-              </motion.div>
-              
-              <h4 className="text-xl font-bold text-center mb-4 text-[#F2F2F2]">
-                Horário de Atendimento
-              </h4>
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between items-center text-[#BBBFBD]">
-                  <span>Segunda - Sexta:</span>
-                  <span className="font-semibold text-[#F2F2F2]">8h às 19h</span>
-                </div>
-                <div className="flex justify-between items-center text-[#BBBFBD]">
-                  <span>Sábado:</span>
-                  <span className="font-semibold text-[#F2F2F2]">9h às 15h</span>
-                </div>
-                <div className="flex justify-between items-center text-[#BBBFBD]">
-                  <span>Domingo:</span>
-                  <span className="font-semibold text-[#BFBAA8]">Emergências</span>
-                </div>
-              </div>
-              
-              <motion.div
-                className="mt-6 flex items-center justify-center gap-2 text-sm text-[#BBBFBD]"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <Heart className="h-4 w-4 text-[#BFBAA8]" />
-                <span>Respostas rápidas garantidas</span>
-              </motion.div>
-            </motion.div>
           </motion.div>
         </div>
       </div>
