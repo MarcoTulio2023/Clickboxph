@@ -2,13 +2,14 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { cn } from '../components/ui/utils'; // Verifique se o caminho para utils.ts está correto
+import { cn } from '../components/ui/utils';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Gilberto Santos Fotografia',
-  description: 'Transformando momentos em arte visual através de uma perspectiva única e atemporal.',
+  title: 'Clickbox',
+  description: 'A estrutura de fotos moderna e personalizada para o seu evento.',
+
 };
 
 export default function RootLayout({

@@ -1,5 +1,7 @@
+// components/Header.tsx
+
 import { useState, useEffect } from 'react';
-import { Menu, X, Camera, Sparkles } from 'lucide-react';
+import { Menu, X, Camera } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './ui/button';
 
@@ -17,9 +19,9 @@ export function Header() {
 
   const navigation = [
     { name: 'Início', href: '#home' },
-    { name: 'Estrutura de Foto', href: '#photo-booth' },
-    { name: 'Sobre', href: '#about' },
-    { name: 'Serviços', href: '#services' },
+    { name: 'Estruturas', href: '#estruturas' },
+    { name: 'Planos', href: '#planos' },
+    { name: 'Benefícios', href: '#beneficios' },
     { name: 'Contato', href: '#contact' },
   ];
 
@@ -35,8 +37,9 @@ export function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          {/* Logo with animation */}
-          <motion.div
+          {/* Logo e nome da empresa */}
+          <motion.a
+            href="#home"
             className="flex-shrink-0 group cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -45,50 +48,30 @@ export function Header() {
               <div className="relative">
                 <motion.div
                   className="w-10 h-10 bg-gradient-to-r from-[#000B07] via-[#403F38] to-[#737065] rounded-2xl flex items-center justify-center"
-                  whileHover={{
-                    background: 'linear-gradient(45deg, #000B07, #403F38, #737065)',
-                    rotate: 360,
-                  }}
+                  whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.8 }}
                 >
                   <Camera className="h-5 w-5 text-[#BFBAA8]" />
                 </motion.div>
-                <motion.div
-                  className="absolute -top-1 -right-1 w-4 h-4"
-                  animate={{
-                    rotate: 360,
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    rotate: { duration: 8, repeat: Infinity, ease: "linear" },
-                    scale: { duration: 2, repeat: Infinity },
-                  }}
-                >
-                  <Sparkles className="h-3 w-3 text-[#737065]" />
-                </motion.div>
               </div>
               <div>
                 <motion.h1 className="text-xl font-medium text-[#000B07]">
-                  Gilberto Santos
+                  CLICKBOX
                 </motion.h1>
                 <motion.p className="text-xs text-[#737065]">
-                  Visual Storyteller
+                  Estrutura de Fotos
                 </motion.p>
               </div>
             </div>
-          </motion.div>
+          </motion.a>
 
-          {/* Desktop Navigation */}
+          {/* Navegação Desktop */}
           <nav className="hidden md:flex space-x-1">
             {navigation.map((item, index) => (
               <motion.a
                 key={item.name}
                 href={item.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
                 className="relative px-6 py-2 text-sm font-medium text-[#403F38] hover:text-[#000B07] transition-colors duration-300 group"
-                whileHover={{ scale: 1.05 }}
               >
                 {item.name}
                 <motion.div
@@ -98,7 +81,7 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Mobile menu button */}
+          {/* Botão do Menu Mobile */}
           <div className="md:hidden">
             <motion.div whileTap={{ scale: 0.95 }}>
               <Button
@@ -123,7 +106,7 @@ export function Header() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Navegação Mobile */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div

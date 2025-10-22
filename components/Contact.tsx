@@ -59,8 +59,8 @@ export function Contact() {
     {
       icon: Mail,
       label: 'E-mail',
-      value: 'contato@gilbertosantos.com',
-      href: `mailto:contato@gilbertosantos.com?subject=${encodeURIComponent("Contato sobre Serviços de Fotografia")}&body=${encodeURIComponent("Olá! Gostaria de mais informações sobre seus serviços.")}`
+      value: 'contato@clickboxph.com', // ALTERADO
+      href: `mailto:contato@clickboxph.com?subject=${encodeURIComponent("Contato sobre ClickBox")}&body=${encodeURIComponent("Olá! Gostaria de mais informações sobre os serviços.")}`
     },
     {
       icon: Phone,

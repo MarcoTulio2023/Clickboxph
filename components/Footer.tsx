@@ -12,9 +12,9 @@ export function Footer() {
 
   const footerLinks = [
     { name: 'Início', href: '#home' },
-    { name: 'Estrutura de foto', href: '#photo-booth'},
-    { name: 'Sobre', href: '#about' },
-    { name: 'Serviços', href: '#services' },
+    { name: 'Estruturas', href: '#estruturas' },
+    { name: 'Planos', href: '#planos' },
+    { name: 'Benefícios', href: '#beneficios' },
     { name: 'Contato', href: '#contact' },
   ];
 
@@ -22,8 +22,8 @@ export function Footer() {
   const contactInfo = [
     {
       icon: Mail,
-      text: 'contato@gilbertosantos.com',
-      href: 'mailto:contato@gilbertosantos.com',
+      text: 'contato@clickboxph.com', // ALTERADO
+      href: 'mailto:contato@clickboxph.com',
     },
     {
       icon: Phone,
@@ -209,7 +209,7 @@ export function Footer() {
               <a href="https://portfoliotulio.netlify.app/#inicio" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
                 Feito com <Heart className="h-4 w-4 inline-block text-[#BFBAA8] fill-current" /> por um amigo programador.
               </a>
-              <p>© {currentYear} Gilberto Santos. Todos os direitos reservados.</p>
+              <p>© {currentYear} Clickboxph. Todos os direitos reservados.</p>
             </div>
             
             <motion.div

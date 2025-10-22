@@ -4,7 +4,7 @@ import { Header } from '../components/Header';
 import { Hero } from '../components/Hero';
 import { PhotoBooth } from '../components/PhotoBooth';
 import { About } from '../components/About';
-import { Services } from '../components/Services';
+import { Estruturas } from '../components/Estruturas';
 import { Contact } from '../components/Contact';
 import { Footer } from '../components/Footer';
 import { WhatsAppFloat } from '../components/WhatsAppFloat';
@@ -15,9 +15,9 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <Estruturas />
         <PhotoBooth />
         <About />
-        <Services />
         <Contact />
       </main>
       <Footer />
